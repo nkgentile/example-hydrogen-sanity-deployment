@@ -5,12 +5,12 @@
   "version": "2024.7.3",
   "type": "module",
   "scripts": {
-    "build": "shopify hydrogen build --codegen",
-    "dev": "shopify hydrogen dev --codegen",
-    "preview": "shopify hydrogen preview --build",
+    "build": "shopify hydrogen build",
+    "dev": "shopify hydrogen dev",
+    "preview": "shopify hydrogen preview --build --port 3333",
+    "deploy": "shopify hydrogen deploy",
     "lint": "eslint --no-error-on-unmatched-pattern --ext .js,.ts,.jsx,.tsx .",
-    "typecheck": "tsc --noEmit",
-    "codegen": "shopify hydrogen codegen"
+    "typecheck": "tsc --noEmit"
   },
   "prettier": "@shopify/prettier-config",
   "dependencies": {
@@ -22,7 +22,8 @@
     "graphql-tag": "^2.12.6",
     "isbot": "^3.8.0",
     "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "react-dom": "^18.2.0",
+    "sanity": "^3.51.0"
   },
   "devDependencies": {
     "@graphql-codegen/cli": "5.0.2",

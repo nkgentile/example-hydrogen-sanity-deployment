@@ -1,21 +1,13 @@
 // @ts-ignore
 // Virtual entry point for the app
 import * as remixBuild from 'virtual:remix/server-build';
-import {
-  cartGetIdDefault,
-  cartSetIdDefault,
-  createCartHandler,
-  createStorefrontClient,
-  storefrontRedirect,
-  createCustomerAccountClient,
-} from '@shopify/hydrogen';
+import {createStorefrontClient, storefrontRedirect} from '@shopify/hydrogen';
 import {
   createRequestHandler,
   getStorefrontHeaders,
   type AppLoadContext,
 } from '@shopify/remix-oxygen';
 import {AppSession} from '~/lib/session';
-import {CART_QUERY_FRAGMENT} from '~/lib/fragments';
 
 /**
  * Export a fetch handler in module format.
@@ -55,29 +47,6 @@ export default {
       });
 
       /**
-       * Create a client for Customer Account API.
-       */
-      const customerAccount = createCustomerAccountClient({
-        waitUntil,
-        request,
-        session,
-        customerAccountId: env.PUBLIC_CUSTOMER_ACCOUNT_API_CLIENT_ID,
-        customerAccountUrl: env.PUBLIC_CUSTOMER_ACCOUNT_API_URL,
-      });
-
-      /*
-       * Create a cart handler that will be used to
-       * create and update the cart in the session.
-       */
-      const cart = createCartHandler({
-        storefront,
-        customerAccount,
-        getCartId: cartGetIdDefault(request.headers),
-        setCartId: cartSetIdDefault(),
-        cartQueryFragment: CART_QUERY_FRAGMENT,
-      });
-
-      /**
        * Create a Remix request handler and pass
        * Hydrogen's Storefront client to the loader context.
        */
@@ -87,8 +56,6 @@ export default {
         getLoadContext: (): AppLoadContext => ({
           session,
           storefront,
-          customerAccount,
-          cart,
           env,
           waitUntil,
         }),
@@ -111,7 +78,6 @@ export default {
 
       return response;
     } catch (error) {
-      // eslint-disable-next-line no-console
       console.error(error);
       return new Response('An unexpected error occurred', {status: 500});
     }

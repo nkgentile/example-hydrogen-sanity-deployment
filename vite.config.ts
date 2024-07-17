@@ -5,11 +5,16 @@ import {vitePlugin as remix} from '@remix-run/dev';
 import tsconfigPaths from 'vite-tsconfig-paths';
 
 export default defineConfig({
+  server: {
+    port: 3333,
+  },
   plugins: [
     hydrogen(),
     oxygen(),
     remix({
       presets: [hydrogen.preset()],
+      routes: (defineRoutes) =>
+        defineRoutes((route) => route('*', 'studio/route.tsx')),
       future: {
         v3_fetcherPersist: true,
         v3_relativeSplatPath: true,
@@ -20,7 +25,7 @@ export default defineConfig({
   ],
   build: {
     // Allow a strict Content-Security-Policy
-    // withtout inlining assets as base64:
+    // without inlining assets as base64:
     assetsInlineLimit: 0,
   },
   ssr: {
