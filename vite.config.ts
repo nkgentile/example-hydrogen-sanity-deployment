@@ -14,7 +14,11 @@ export default defineConfig({
     remix({
       presets: [hydrogen.preset()],
       routes: (defineRoutes) =>
-        defineRoutes((route) => route('*', 'studio/route.tsx')),
+        defineRoutes((route) => {
+          const studioPath = 'studio/route.tsx';
+          route('/', studioPath, {id: 'index', index: true});
+          route('*', studioPath, {id: 'splat'});
+        }),
       future: {
         v3_fetcherPersist: true,
         v3_relativeSplatPath: true,
