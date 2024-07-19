@@ -1,8 +1,6 @@
 {
-  "name": "example-hydrogen-sanity-deployment",
   "private": true,
   "sideEffects": false,
-  "version": "2024.7.3",
   "type": "module",
   "scripts": {
     "build": "shopify hydrogen build",
@@ -18,19 +16,15 @@
     "@remix-run/server-runtime": "^2.10.1",
     "@shopify/hydrogen": "2024.7.2",
     "@shopify/remix-oxygen": "^2.0.5",
-    "graphql": "^16.6.0",
-    "graphql-tag": "^2.12.6",
     "isbot": "^3.8.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "sanity": "^3.51.0"
   },
   "devDependencies": {
-    "@graphql-codegen/cli": "5.0.2",
     "@remix-run/dev": "^2.10.1",
     "@remix-run/eslint-config": "^2.10.1",
     "@shopify/cli": "^3.64.0",
-    "@shopify/hydrogen-codegen": "^0.3.1",
     "@shopify/mini-oxygen": "^3.0.4",
     "@shopify/oxygen-workers-types": "^4.1.2",
     "@shopify/prettier-config": "^1.1.2",
